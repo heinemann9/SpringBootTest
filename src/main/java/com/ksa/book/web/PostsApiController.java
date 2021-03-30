@@ -1,7 +1,9 @@
 package com.ksa.book.web;
 
 import com.ksa.book.service.posts.PostsService;
+import com.ksa.book.web.dto.PostsResponseDto;
 import com.ksa.book.web.dto.PostsSaveRequestDto;
+import com.ksa.book.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +19,15 @@ public class PostsApiController {
         return postsService.save(requestDto);
     }
 
-//    @PutMapping("/api/v1/posts/{id}")
-//    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequest Dto)
-//    {
-//        return postsService.update(id, requestDto);
-//    }
-//
-//    @GetMapping("/api/v1/posts/{id}")
-//    public PostsResponseDto findById(@PathVariable Long id)
-//    {
-//
-//    }
+    @PutMapping("/api/v1/posts/{id}")
+    public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto)
+    {
+        return postsService.update(id, requestDto);
+    }
+
+    @GetMapping("/api/v1/posts/{id}")
+    public PostsResponseDto findById(@PathVariable Long id)
+    {
+        return postsService.findById(id);
+    }
 }
