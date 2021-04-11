@@ -1,5 +1,6 @@
 package com.ksa.book.web;
 
+import com.ksa.book.config.auth.LoginUser;
 import com.ksa.book.config.auth.dto.SessionUser;
 import com.ksa.book.service.posts.PostsService;
 import com.ksa.book.web.dto.PostsResponseDto;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import javax.mail.Session;
 import javax.servlet.http.HttpSession;
 
 @RequiredArgsConstructor
@@ -20,10 +22,9 @@ public class IndexController
     private final HttpSession httpSession;
 
     @GetMapping("/")
-    public String index(Model model)
+    public String index(Model model, @LoginUser SessionUser user)
     {
         model.addAttribute("posts", postsService.findAllDesc());
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
 
         if (user != null)
         {
